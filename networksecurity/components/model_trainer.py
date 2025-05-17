@@ -17,11 +17,22 @@ from sklearn.neighbors import KNeighborsClassifier
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.ensemble import RandomForestClassifier, GradientBoostingClassifier, AdaBoostClassifier
 
+import mlflow
+
 
 class ModelTrainer:
     def __init__(self, model_trainer_config: ModelTrainerConfig, data_transformation_artifact: DataTransformationArtifact):
         self.model_trainer_config = model_trainer_config
         self.data_transformation_artifact = data_transformation_artifact
+
+    def track_mlflow(self, model, classification_train_score):
+        with mlflow.start_run():
+            f1_score = classification_train_score.f1_score
+            precision_score = classification_train_score.precision_score
+            recall_score = classification_train_score.recall_score
+
+            mlflow.log_metrics({"f1_score": f1_score, "precision_score": precision_score, "recall_score": recall_score})
+            mlflow.sklearn.log_model(model, "model")
 
     def train_model(self, x_train, y_train, x_test, y_test):
         try:
@@ -69,6 +80,10 @@ class ModelTrainer:
             classification_test_score = get_classification_score(y_test, y_test_pred)
 
             # track the mlflow
+            self.track_mlflow(best_model, classification_train_score)
+            self.track_mlflow(best_model, classification_test_score)
+
+            # save the model
             logging.info("preprocessor loaded")
             preprocessor = load_object(file_path=self.data_transformation_artifact.transformed_object_file_path)
 
