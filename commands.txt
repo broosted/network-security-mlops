@@ -1,0 +1,15 @@
+Docker Setup in EC2 commands to be executed
+
+sudo apt-get update -y
+sudo apt-get update
+
+curl -fsSL https://get.docker.com -o get-docker.sh
+sudo sh get-docker.sh
+
+sudo usermod -aG docker ubuntu
+
+newgrp docker
+
+Runners / Add new self-hosted runner · broosted/network-security-mlops
+
+Follow the steps there Settings -> Actions -> Runners new runner linux
