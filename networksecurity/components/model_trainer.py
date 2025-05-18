@@ -95,8 +95,9 @@ class ModelTrainer:
             os.makedirs(model_dir_path, exist_ok=True)
 
             network_model = NetworkModel(preprocessor=preprocessor, model=best_model)
-
             save_object(file_path=self.model_trainer_config.trained_model_file_path, obj=network_model) 
+
+            save_object("final_models/model.pkl", obj=best_model)
 
             model_trainer_artifact = ModelTrainerArtifact(
                 trained_model_file_path=self.model_trainer_config.trained_model_file_path,

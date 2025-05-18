@@ -66,6 +66,8 @@ class DataTransformation:
             save_numpy_array_data(file_path=self.data_transformation_config.transformed_test_file_path, array=test_arr)
 
             save_object(file_path=self.data_transformation_config.transformed_object_file_path, obj=preprocessing_obj)
+
+            save_object("final_models/preprocessor.pkl", obj=preprocessing_obj)
             
             logging.info("Exited initiate_data_transformation method of DataTransformation class")
 
