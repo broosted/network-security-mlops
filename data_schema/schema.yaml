@@ -9,7 +9,7 @@ columns:
   - SSLfinal_State: int64
   - Domain_registeration_length: int64
   - Favicon: int64
-  - Port: int64
+  - port: int64
   - HTTPS_token: int64
   - Request_URL: int64
   - URL_of_Anchor: int64
@@ -43,7 +43,7 @@ numerical_columns:
   - having_Sub_Domain
   - Domain_registeration_length
   - Favicon
-  - Port
+  - port
   - HTTPS_token
   - Request_URL
   - URL_of_Anchor
