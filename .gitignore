@@ -2,3 +2,4 @@ network-venv/
 .env
 logs/
 mlruns/
+Artifacts/
